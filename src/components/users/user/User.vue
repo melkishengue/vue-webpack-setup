@@ -6,7 +6,6 @@
       <label for="">Email:</label> {{ user.email }} </br>
       <label for="">Website:</label> {{ user.website }}</br>
       <label for="">Phone:</label> {{ user.phone }}</br>
-      <router-link to="/details">View details</router-link>
     </div>
   </div>
 </template>
