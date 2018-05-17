@@ -30,6 +30,7 @@ export default {
   // with mapState you map store state properties with local properties
   computed: mapState({
     // create property users locally mapped with users from the store
+    // short form: 'users' is going to be matched with store.state.users
     users: (state) => {
       return state.users
     }
