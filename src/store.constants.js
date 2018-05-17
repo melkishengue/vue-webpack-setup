@@ -1,2 +1,3 @@
 export const UPDATE_USERS = 'UPDATE_USERS';
 export const FILTER_USERS = 'FILTER_USERS';
+export const TOGGLE_SELECTED = 'TOGGLE_SELECTED';

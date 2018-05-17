@@ -3,7 +3,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import UsersService from 'Services/users.service';
-import { UPDATE_USERS, FILTER_USERS } from 'Src/store.constants';
+import { UPDATE_USERS, FILTER_USERS, TOGGLE_SELECTED } from 'Src/store.constants';
 
 Vue.use(Vuex);
 
@@ -11,7 +11,8 @@ export const store = new Vuex.Store({
   state: {
     users: [],
     savedUsers: [],
-    filter: ''
+    filter: '',
+    selected: -1
   },
   mutations: {
     [UPDATE_USERS](state, users) {
@@ -23,6 +24,13 @@ export const store = new Vuex.Store({
       state.users = state.savedUsers.filter((user) => {
         return user.website.indexOf(filter) !== -1
       });
+    },
+    [TOGGLE_SELECTED](state, userId) {
+      if (userId === state.selected) {
+        state.selected = -1;
+      } else {
+        state.selected = userId;
+      }
     }
   },
   actions: {
@@ -35,6 +43,9 @@ export const store = new Vuex.Store({
     },
     filterUsers({ commit }, filter) {
       commit(FILTER_USERS, filter);
+    },
+    toggleSelect({ commit }, userId) {
+      commit(TOGGLE_SELECTED, userId);
     }
   },
   // not really useful since I can map store properties with local properties within components

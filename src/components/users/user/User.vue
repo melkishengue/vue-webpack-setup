@@ -12,9 +12,8 @@
 </template>
 
 <script>
-import UsersService from 'Services/users.service';
-import Vue from 'vue';
-const eventHub = new Vue();
+
+import { mapState } from 'vuex';
 
 export default {
   name: 'Users',
@@ -26,19 +25,18 @@ export default {
   },
   data() {
     return {
-      selected: false,
-      eventHub: eventHub
+
     }
   },
-  created() {
-    this.eventHub.$on('unselectAll', data => {
-      if(data.id !== this.id) this.selected = false;
-    });
-  },
+  computed: mapState({
+    // can't use an arrow function here, loose of the this reference for the vue component
+    selected: function (state) {
+      return state.selected == this.user.id
+    }
+  }),
   methods: {
     toggleSelect() {
-      this.eventHub.$emit('unselectAll', {id: this.user.id});
-      this.selected = !this.selected;
+      this.$store.dispatch('toggleSelect', this.user.id);
     }
   }
 }
