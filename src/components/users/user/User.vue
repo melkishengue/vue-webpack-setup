@@ -30,7 +30,7 @@ export default {
   computed: mapState({
     // can't use an arrow function here, loose of the this reference for the vue component
     selected: function (state) {
-      return state.selected == this.user.id
+      return state.selected.includes(this.user.id);
     }
   }),
   methods: {
@@ -58,6 +58,6 @@ export default {
   }
 
   .selected {
-    border: 2px solid black;
+    border: 2px solid gold;
   }
 </style>

@@ -12,7 +12,7 @@ export const store = new Vuex.Store({
     users: [],
     savedUsers: [],
     filter: '',
-    selected: -1
+    selected: []
   },
   mutations: {
     [UPDATE_USERS](state, users) {
@@ -26,10 +26,10 @@ export const store = new Vuex.Store({
       });
     },
     [TOGGLE_SELECTED](state, userId) {
-      if (userId === state.selected) {
-        state.selected = -1;
+      if (state.selected.includes(userId)) {
+        state.selected.splice(state.selected.indexOf(userId), 1);
       } else {
-        state.selected = userId;
+        state.selected.push(userId);
       }
     }
   },
