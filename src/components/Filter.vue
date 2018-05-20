@@ -35,7 +35,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
   button:focus {outline:0;}
 
@@ -51,6 +51,5 @@ export default {
 
   .active {
     border: 2px solid black;
-    ont-weight: bold;
   }
 </style>

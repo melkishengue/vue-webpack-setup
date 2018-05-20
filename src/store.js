@@ -9,9 +9,13 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
+    // filtered users
     users: [],
+    // original fetched users, needed for applying filters
     savedUsers: [],
+    // applied filter
     filter: '',
+    // selected users
     selected: []
   },
   mutations: {
@@ -25,11 +29,11 @@ export const store = new Vuex.Store({
         return user.website.indexOf(filter) !== -1
       });
     },
-    [TOGGLE_SELECTED](state, userId) {
-      if (state.selected.includes(userId)) {
-        state.selected.splice(state.selected.indexOf(userId), 1);
+    [TOGGLE_SELECTED](state, user) {
+      if (state.selected.includes(user)) {
+        state.selected.splice(state.selected.indexOf(user), 1);
       } else {
-        state.selected.push(userId);
+        state.selected.push(user);
       }
     }
   },
@@ -37,21 +41,23 @@ export const store = new Vuex.Store({
     // normally actions receive the context as param: fetchUsers(context)
     // I just need context.commit though
     fetchUsers({ commit }) {
-      UsersService.get('users').then(response => {
+      UsersService.getUsers().then(response => {
         commit(UPDATE_USERS, response.data);
       });
     },
     filterUsers({ commit }, filter) {
       commit(FILTER_USERS, filter);
     },
-    toggleSelect({ commit }, userId) {
-      commit(TOGGLE_SELECTED, userId);
+    toggleSelect({ commit }, user) {
+      commit(TOGGLE_SELECTED, user);
     }
   },
-  // not really useful since I can map store properties with local properties within components
   getters: {
-    users(state) {
-      return state.users
+    countSelected(state) {
+      return state.selected.reduce((sum, element) => {
+        if (state.users.includes(element)) return sum+1;
+        return sum;
+      }, 0);
     }
   }
 })

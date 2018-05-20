@@ -1,22 +1,25 @@
 <template>
   <div id="app">
-    <users />
+    <Users />
+    <Count />
   </div>
 
 </template>
 
 <script>
 import Users from 'Components/users/Users.vue';
+import Count from 'Components/Count.vue';
 
 export default {
   name: 'app',
   components: {
-    Users
+    Users,
+    Count
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
