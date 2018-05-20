@@ -1,8 +1,8 @@
 # vue-webpack-setup
-Testing vue with webpack and vuex
+Testing vue with webpack 4 and vuex
 
 - Clone the repo
 - npm install
-- npm run dev
+- npm run build
 
-Open index.html in your favorite browser.
+Open dist/index.html in your favorite browser.

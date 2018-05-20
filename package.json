@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --open",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
+    "build": "webpack --config ./webpack.config.js",
     "test": "karma start",
     "dev": "webpack --config ./webpack.config.js --watch",
     "wds": "webpack-dev-server"
