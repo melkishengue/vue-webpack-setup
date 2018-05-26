@@ -60,4 +60,4 @@ export const store = new Vuex.Store({
       }, 0);
     }
   }
-})
+});
