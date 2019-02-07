@@ -1,10 +1,11 @@
 <template>
   <div>
-      <filterComponent />
+    <filterComponent />
 
-      <div class="user-div" v-for="user in users">
-        <user :user='user'/>
-      </div>
+    <transition-group tag="div" name="list" class="users-container">
+      <user v-for="user in users" :user='user' :key="user.id"/>
+    </transition-group>
+    <div v-if="!users.length" class="disabled left">No users found</div>
   </div>
 </template>
 
@@ -27,9 +28,7 @@ export default {
   created() {
     this.$store.dispatch('fetchUsers');
   },
-  // with mapState you map store state properties with local properties
   computed: mapState({
-    // create property users locally mapped with users from the store
     users: (state) => {
       return state.users
     }
@@ -41,24 +40,41 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .buttons-div {
-
+  .users-container {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(4, 1fr);
+    clear: right;
   }
 
-  button:focus {outline:0;}
-
-  button {
-    font-size: 16px;
-    border: 2px solid silver;
-    border-radius: 4px;
-    text-align: left;
-    padding: 5px;
-    margin: 5px;
-    /* float: left; */
+  .disabled {
+    color: #999;
   }
 
-  .active {
-    border: 2px solid black;
-    ont-weight: bold;
+  .list-enter-active,
+  .list-leave-active,
+  .list-move {
+    transition: 200ms cubic-bezier(0.59, 0.12, 0.34, 0.95);
+    transition-property: opacity, transform;
+  }
+
+  .list-enter {
+    opacity: 0;
+    transform: translateX(50px) scaleY(0.5);
+  }
+
+  .list-enter-to {
+    opacity: 1;
+    transform: translateX(0) scaleY(1);
+  }
+
+  .list-leave-active {
+    position: absolute;
+  }
+
+  .list-leave-to {
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: center top;
   }
 </style>

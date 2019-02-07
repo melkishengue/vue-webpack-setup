@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="counter" >
-      Selected: {{ count }}
+      Selected: {{ countInfo.all ? 'all (' + countInfo.count + ')'  : countInfo.count }}
     </div>
   </div>
 </template>
@@ -13,20 +13,21 @@ import { mapState } from 'vuex';
 export default {
   name: 'Count',
   computed: {
-    count() {
+    countInfo () {
       return this.$store.getters.countSelected;
     }
-  }
+}
 }
 </script>
 
 <style lang="scss" scoped>
   #counter {
     position: absolute;
-    right: 25px;
+    right: 95px;
     top: 25px;
-    font-weight: bold;
-    font-size: 16px;
-    color: orange;
+    font-size: 14px;
+    color: #ff5900;
+    padding: 10px;
+    border-radius: 2px;
   }
 </style>

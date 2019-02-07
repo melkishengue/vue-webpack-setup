@@ -8,7 +8,7 @@ export default {
       axios.get(baseURL + '/users', {
         timeout: 5000,
         headers: {
-          'Content-Type': '__application/json'
+          'Content-Type': 'application/json'
         }
       }).then((response) => {
         resolve(response);

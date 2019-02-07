@@ -18,7 +18,12 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        use: 'vue-loader'
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            'js': 'babel-loader'
+          }
+        }
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -42,17 +47,14 @@ module.exports = {
               "css-loader", // translates CSS into CommonJS
               "sass-loader" // compiles Sass to CSS
           ]
+      },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader'
+        }
       }
-    //   {
-    //   test: /\.js$/,
-    //   exclude: /(node_modules|bower_components)/,
-    //   use: {
-    //     loader: 'babel-loader',
-    //     options: {
-    //       presets: ['@babel/preset-env']
-    //     }
-    //   }
-    // }
     ]
   },
   plugins: [

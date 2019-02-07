@@ -1,3 +1,6 @@
 export const UPDATE_USERS = 'UPDATE_USERS';
 export const FILTER_USERS = 'FILTER_USERS';
 export const TOGGLE_SELECTED = 'TOGGLE_SELECTED';
+export const SET_USERS = 'SET_USERS';
+export const SET_FILTER_TEXT = 'SET_FILTER_TEXT';
+export const SET_FILTER_CATEGORY = 'SET_FILTER_CATEGORY';
