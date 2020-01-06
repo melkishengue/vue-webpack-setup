@@ -3,7 +3,6 @@
 const { resolve, join } = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   context: __dirname,
@@ -62,8 +61,7 @@ module.exports = {
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       template: join(__dirname, 'src/assets/index.html')
-    }),
-    new CopyWebpackPlugin([{from: 'models', to: './models'}, {from: 'glasses', to: './glasses'}])
+    })
   ],
   resolve: {
     alias: {
@@ -76,9 +74,5 @@ module.exports = {
   },
   devServer: {
     contentBase: join(__dirname, "dist")
-  },
-  node: {
-    fs: "empty"
- },
- target: 'web'
+  }
 }
