@@ -3,6 +3,7 @@
 const { resolve, join } = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   context: __dirname,
@@ -61,7 +62,8 @@ module.exports = {
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       template: join(__dirname, 'src/assets/index.html')
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ],
   resolve: {
     alias: {
@@ -73,6 +75,7 @@ module.exports = {
     }
   },
   devServer: {
-    contentBase: join(__dirname, "dist")
+    contentBase: join(__dirname, "dist"),
+    hot: true
   }
 }

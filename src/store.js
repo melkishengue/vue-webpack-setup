@@ -11,14 +11,13 @@ import {
     SET_FILTER_CATEGORY,
     SET_FILTER_TEXT
 } from 'Src/store.constants';
-import { resolve } from 'url';
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
     // filtered users
-    users: [],
+    users: [], 
     // original fetched users, needed for applying filters
     savedUsers: [],
     // applied filter
