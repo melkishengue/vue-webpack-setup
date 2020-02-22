@@ -20,11 +20,11 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   #counter {
     position: absolute;
-    right: 95px;
-    top: 25px;
+    right: 5px;
+    top: 10px;
     font-size: 14px;
     color: #ff5900;
     padding: 10px;

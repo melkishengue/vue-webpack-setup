@@ -7,6 +7,8 @@
     </transition-group>
     <div v-if="!users.length" class="disabled left">No users found</div>
   </div>
+
+  
 </template>
 
 <script>
