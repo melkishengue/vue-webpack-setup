@@ -3,14 +3,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import UsersService from 'Services/users.service';
-import { 
-    UPDATE_USERS, 
-    FILTER_USERS, 
-    TOGGLE_SELECTED,
-    SET_USERS,
-    SET_FILTER_CATEGORY,
-    SET_FILTER_TEXT
-} from 'Src/store.constants';
+import constants from 'Src/store.constants';
 
 Vue.use(Vuex);
 
@@ -29,11 +22,11 @@ export const store = new Vuex.Store({
 
   },
   mutations: {
-    [UPDATE_USERS](state, users) {
+    [constants.UPDATE_USERS](state, users) {
       state.users = users;
       state.savedUsers = users;
     },
-    [FILTER_USERS](state) {
+    [constants.FILTER_USERS](state) {
       let users = state.savedUsers.filter((user) => {
         return user.website.indexOf(state.filter_category) !== -1;
       });
@@ -50,16 +43,16 @@ export const store = new Vuex.Store({
 
       state.users = users;
     },
-    [SET_USERS](state, users) {
+    [constants.SET_USERS](state, users) {
       state.users = users;
     },
-    [SET_FILTER_TEXT](state, filter_text) {
+    [constants.SET_FILTER_TEXT](state, filter_text) {
       state.filter_text = filter_text;
     },
-    [SET_FILTER_CATEGORY](state, filter_category) {
+    [constants.SET_FILTER_CATEGORY](state, filter_category) {
       state.filter_category = filter_category;
     },
-    [TOGGLE_SELECTED](state, user) {
+    [constants.TOGGLE_SELECTED](state, user) {
       let { id }  = user;
       if (state.selected.includes(id)) {
         state.selected.splice(state.selected.indexOf(id), 1);
@@ -71,19 +64,19 @@ export const store = new Vuex.Store({
   actions: {
     async fetchUsers({ commit }) {
       let users = await UsersService.getUsers();
-      commit (UPDATE_USERS, users.data);
+      commit (constants.UPDATE_USERS, users);
     },
     toggleSelect({ commit }, user) {
-      commit(TOGGLE_SELECTED, user);
+      commit(constants.TOGGLE_SELECTED, user);
     },
     filter({ commit, state }, payload) {
       return new Promise((resolve, reject) => {
         let { text, category } = payload;
 
-        if (text !== undefined) commit(SET_FILTER_TEXT, text);
-        if (category !== undefined) commit(SET_FILTER_CATEGORY, category);
+        if (text !== undefined) commit(constants.SET_FILTER_TEXT, text);
+        if (category !== undefined) commit(constants.SET_FILTER_CATEGORY, category);
 
-        commit(FILTER_USERS);
+        commit(constants.FILTER_USERS);
         resolve();
       })
     }
